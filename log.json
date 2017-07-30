@@ -1,0 +1,16 @@
+[
+{"question": "2 + 2 equals...",
+"answer": "4"},
+
+{"question": "8 * 8 equals...",
+"answer": "64"},
+
+{"question": "The square root of 25 is...",
+"answer": "5"},
+
+{"question": "A car is driving 50 mph.  The speed of each of its wheels at the point where they touch the ground is...",
+"answer": "0"},
+
+{"question": "If you have a table with 10 chairs, the number of differnt ways you can seat 10 people is...",
+"answer": "3,628,800"}
+]

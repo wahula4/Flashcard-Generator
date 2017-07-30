@@ -1,0 +1,22 @@
+[
+{"cloze": "4",
+"partial": "2 + 2 equals",
+"fullAnswer": "2 + 2 equals 4"},
+
+{"cloze":"64",
+"partial": "8 * 8 equals",
+"fullAnswer": "8 * 8 equals 64"},
+
+{"cloze": "5",
+"partial": "The square root of 25 is",
+"fullAnswer": "The square root of 25 is 5"},
+
+{"cloze":"0",
+"partial": "A car is driving 50 mph.  The speed of each of its wheels at the point where they touch the ground is",
+"fullAnswer": "A car is driving 50 mph.  The speed of each of its wheels at the point where they touch the ground is 0"},
+
+{"cloze":"3,628,800",
+"partial": "If you have a table with 10 chairs, the number of differnt ways you can seat 10 people is",
+"fullAnswer": "If you have a table with 10 chairs, the number of differnt ways you can seat 10 people is 3,628,800"}
+
+]
