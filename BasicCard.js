@@ -1,69 +1,68 @@
 // dependency for inquirer npm package
 var inquirer = require("inquirer");
-var basicQuestions = require("./log.json");
-var counter = 0;
-var correctAnswerCount = 0;
+var basicQuestions = require("./basicQuestions.json"); // to access questions and answers
+var counter = 0; // question counter starts at 0
+var score = 0; // correct answers starts at 0
 
-function ClozeCard(question, answer){
+// basic card constructor
+function BasicCard(question, answer){
   this.question = question;
   this.answer = answer;
 };
 
 var askQuestions = function (){
-
-  if(counter < 5){
+  // if there are questions remaining, continue asking them
+  if(counter < basicQuestions.length){
 
   inquirer.prompt([
-
+    // ask question for each object in the array
     {type: "input",
       message: basicQuestions[counter].question,
       name: "question"
-      }//if
+      }
  ]).then(function(answer){
 
   var userInput = answer.question.toLowerCase();
 
     if(userInput === basicQuestions[counter].answer){
           console.log("Correct!");
-          correctAnswerCount++;
-        }//if
+          score++;
+        }
 
         else{
           console.log("Wrong!");
           console.log(basicQuestions[counter].answer);
-        }//else
+        }
 
-  counter++
-  askQuestions();
+  counter++; // increment to the next question
+  askQuestions(); // run the askQuestions function
 
   });//closing then
 } //closing if
 
 else{
   console.log("Game Over!")
-  console.log("Correct Answers: " + correctAnswerCount);
+  console.log("Correct Answers: " + score);
   inquirer.prompt([
 
       {type: "confirm",
         message: "Do you want to play again?",
-        name: "playAgain",
-        default: true
+        name: "startOver",
+        default: true  // if nothing is entered, start game over
         }
     ]).then(function(answer){
 
-      if (answer.playAgain === true){
+      if (answer.startOver === true){
         counter = 0;
-        correctAnswerCount = 0;
-        askQuestions();
-
+        score = 0;
+        askQuestions();  // start game over by running askQuestions function
       }
       else{
-        console.log("Thank you for playing!");
+        console.log("Better luck next time!");
       }
-
   });
 }
 
 }; //closing function
 
-askQuestions();
+askQuestions();  // initiate the game

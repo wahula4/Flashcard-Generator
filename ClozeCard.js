@@ -1,80 +1,67 @@
 var inquirer = require("inquirer");
 var clozeQuestions = require("./clozeQuestions.json");
 var counter = 0;
-var correctAnswerCount = 0;
+var score = 0;
 
+// cloze card constructor
 function ClozeCard(partial, cloze){
-  this.cloze = cloze;
   this.partial = partial + "...";
+  this.cloze = cloze;
   this.fullText = partial + " " + cloze;
-  this.returnCloze = function(){
-    console.log("Answer: " + this.cloze);
-};
-  this.returnPartial = function(){
-  console.log(this.partial);
-};
-  this.returnFullText = function(){
-  console.log(this.fullText);
-
-};
-
 };
 
 var askQuestions = function (){
-
-  if(counter < 5){
+    // if there are questions remaining, continue asking them
+  if(counter < clozeQuestions.length){
 
   inquirer.prompt([
 
     {type: "input",
       message: clozeQuestions[counter].partial + "...",
       name: "question"
-      }//if
- ]).then(function(answer){
+      }
+    ]).then(function(answer){
 
-  var userInput = answer.question.toLowerCase();
+    var userInput = answer.question.toLowerCase();
 
     if(userInput === clozeQuestions[counter].cloze){
           console.log("Correct!");
-          correctAnswerCount++;
-        }//if
+          score++;
+        }
 
         else{
           console.log("Wrong!");
           console.log(clozeQuestions[counter].fullAnswer);
-        }//else
-
-  counter++
-  askQuestions();
-
-  });//closing then
-} //closing if
-
-else{
-  console.log("Game Over!")
-  console.log("Correct Answers: " + correctAnswerCount);
-  inquirer.prompt([
-
-      {type: "confirm",
-        message: "Do you want to play again?",
-        name: "playAgain",
-        default: true
         }
-    ]).then(function(answer){
 
-      if (answer.playAgain === true){
-        counter = 0;
-        correctAnswerCount = 0;
-        askQuestions();
+    counter++
+    askQuestions();
 
-      }
-      else{
-        console.log("Thank you for playing!");
-      }
+    });//closing then
+  } //closing if
 
-  });
-}
+  else{
+    console.log("Game Over!")
+    console.log("Correct Answers: " + score);
+    inquirer.prompt([
 
-}; //closing function
+        {type: "confirm",
+          message: "Do you want to play again?",
+          name: "startOver",
+          default: true
+          }
+      ]).then(function(answer){
+
+        if (answer.startOver === true){
+          counter = 0;
+          score = 0;
+          askQuestions();
+        }
+        else{
+          console.log("Better luck next time!");
+        }
+    });
+  }
+};
 
 askQuestions();
